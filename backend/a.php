@@ -31,7 +31,11 @@ if($_SESSION['qws_result']->{'answer'} !== $_POST['answer']) {
 $_SESSION['qws_result'] = array();
 
 // bump up the correct_answers value, setting it to one if it currently isn't set
-$_SESSION['correct_answers']++;
+if( !isset($_SESSION['correct_answers']) ) {
+    $_SESSION['correct_answers'] = 1;
+} else {
+    $_SESSION['correct_answers']++;
+}
 
 print(json_encode(array(
     "success" => true,
