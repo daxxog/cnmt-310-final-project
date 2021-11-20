@@ -1,0 +1,3 @@
+[submodule "backend/phpclasses_ws"]
+	path = backend/phpclasses_ws
+	url = https://github.com/suehring-uwsp/phpclasses_ws.git
