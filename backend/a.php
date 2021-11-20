@@ -21,8 +21,17 @@ foreach($required_elements as $element){
 }
 
 if($_SESSION['qws_result']->{'answer'} !== $_POST['answer']) {
-    http_response_code(400);
-    die('{"success": false}');
+    // bump up the incorrect_answers value, setting it to one if it currently isn't set
+    if( !isset($_SESSION['incorrect_answers']) ) {
+        $_SESSION['incorrect_answers'] = 1;
+    } else {
+        $_SESSION['incorrect_answers']++;
+    }
+
+    die(json_encode(array(
+        "success" => true,
+        "incorrect_answers" => $_SESSION['incorrect_answers']
+    )));
 }
 
 // remove the question web service result from the session so
