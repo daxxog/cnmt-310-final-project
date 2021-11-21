@@ -11,7 +11,7 @@ if( (!isset($_SESSION['qws_result'])) || empty($_SESSION['qws_result']) ) {
     die('{"success": false}');
 }
 
-$required_elements = ["result", "code", "message", "question", "answer"];
+$required_elements = ["result", "code", "message", "question", "answer", "hash"];
 foreach($required_elements as $element){
     // again, the is "empty" check won't work here because of the value of "code"
     if( !isset($_SESSION['qws_result']->{$element}) ) {
@@ -20,7 +20,17 @@ foreach($required_elements as $element){
     }
 }
 
-if($_SESSION['qws_result']->{'answer'} !== $_POST['answer']) {
+// save the answer for validation
+$_answer = $_SESSION['qws_result']->{'answer'};
+
+// get the hash of the question and mark it as answered $_SESSION
+$_SESSION['answered_' . $_SESSION['qws_result']->{'hash'}] = true;
+
+// remove the question web service result from the session so
+// we can't just keep answering the same question over and over
+$_SESSION['qws_result'] = array();
+
+if($_answer !== $_POST['answer']) {
     // bump up the incorrect_answers value, setting it to one if it currently isn't set
     if( !isset($_SESSION['incorrect_answers']) ) {
         $_SESSION['incorrect_answers'] = 1;
@@ -33,14 +43,6 @@ if($_SESSION['qws_result']->{'answer'} !== $_POST['answer']) {
         "incorrect_answers" => $_SESSION['incorrect_answers']
     )));
 }
-
-// get the hash of the question and mark it as answered $_SESSION
-$_SESSION['answered_' . $_SESSION['qws_result']->{'hash'}] = true;
-
-// remove the question web service result from the session so
-// we can't just keep answering the same question over and over
-// to bump up the correct_answers value
-$_SESSION['qws_result'] = array();
 
 // bump up the correct_answers value, setting it to one if it currently isn't set
 if( !isset($_SESSION['correct_answers']) ) {
