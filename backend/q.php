@@ -39,14 +39,14 @@ try {
 //-DEBUG        var_dump($_SESSION);
         $_return_result = array(
             "success" => true,
-//-TESTING            "answer" => $qws_result->{'answer'},
             "question" => $_SESSION['qws_result']->{'question'}
         );
         die(json_encode($_return_result));
     }
 
     // get result and do some basic validation
-    $qws_result = json_decode($client->send());
+    $qws_json_string = $client->send();
+    $qws_result = json_decode($qws_json_string);
     $required_elements = ["result", "code", "message", "question", "answer"];
     foreach($required_elements as $element){
         // again, the is "empty" check won't work here because of the value of "code"
@@ -57,9 +57,15 @@ try {
     }
 
     if($qws_result->{"result"} === "Success") {
+        $qws_result->{'hash'} = hash('sha256', $qws_json_string);
+
+        // if we already have answered this question, die
+        if(isset($_SESSION['answered_'.$qws_result->{'hash'}]) && $_SESSION['answered_'.$qws_result->{'hash'}] === true) {
+            die('{"success": false}');
+        }
+
         $_return_result = array(
             "success" => true,
-//-TESTING            "answer" => $qws_result->{'answer'},
             "question" => $qws_result->{'question'}
         );
         $_SESSION['qws_result'] = $qws_result;

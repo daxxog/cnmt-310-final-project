@@ -34,6 +34,9 @@ if($_SESSION['qws_result']->{'answer'} !== $_POST['answer']) {
     )));
 }
 
+// get the hash of the question and mark it as answered $_SESSION
+$_SESSION['answered_' . $_SESSION['qws_result']->{'hash'}] = true;
+
 // remove the question web service result from the session so
 // we can't just keep answering the same question over and over
 // to bump up the correct_answers value
