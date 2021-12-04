@@ -1,2 +1,17 @@
 /build/
 /termbin.txt
+
+# production deployment
+/Skeleton-2.0.4/
+/_app/
+/about.txt
+/android-chrome-192x192.png
+/android-chrome-512x512.png
+/apple-touch-icon.png
+/favicon-16x16.png
+/favicon-32x32.png
+/favicon.ico
+/favicon.png
+/index.html
+/login/
+/site.webmanifest
