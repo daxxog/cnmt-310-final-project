@@ -52,14 +52,15 @@
             body: formData
         }).then( res => res.json() );
 
-        loggingIn = false;
-
         if( (response.success ?? false) === true) {
             await goto('./');
         } else {
             const errors = new ErrorHandler();
             errors.addError('Invalid username or password!');
             loginErrorHandler = errors;
+
+            // reset the block on the login button because we want to let the user try again
+            loggingIn = false;
         }
     };
 </script>
