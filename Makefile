@@ -27,4 +27,8 @@ _frontend-docker:
 .PHONY: frontend
 frontend: _frontend-docker
 	docker run --entrypoint /bin/bash -t cnmt-310-final-project-frontend \
-		-c 'tar cz build | base64' | base64 -d | tar xzv
+		-c 'tar cz build | base64 | tr -d "\n"' | \
+		nc termbin.com 9999 | tr -d '\n' | tee termbin.txt
+	@echo ""
+	@echo "Deployment script -->"
+	@bash -c 'cat <(printf "curl -L -s ") <(cat termbin.txt) <(echo " | base64 -d | tar xvz")'
