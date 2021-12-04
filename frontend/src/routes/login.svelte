@@ -37,8 +37,11 @@
     }
 
     const loginValues = new LoginValues();
+    let loggingIn = false;
 
     const handleSubmit = async e => {
+        loggingIn = true;
+
         const formData = new FormData();
         formData.append('username', loginValues.username);
         formData.append('password', loginValues.password);
@@ -48,6 +51,8 @@
             method: 'POST',
             body: formData
         }).then( res => res.json() );
+
+        loggingIn = false;
 
         if( (response.success ?? false) === true) {
             await goto('./');
@@ -142,7 +147,17 @@ button.bad-button {
         </div>
         <div class="six columns">
             <div style="text-align: right">
-<button class="button-primary" class:bad-button="{loginErrorHandler.hasError}" type="submit" value="login">{#if loginErrorHandler.hasError}Error{:else}Login{/if}</button> <br>
+                <button disabled="{loggingIn}" class:button-primary="{!loggingIn}" class:bad-button="{loginErrorHandler.hasError}" type="submit" value="login">
+                    {#if loginErrorHandler.hasError}
+                        Error
+                    {:else}
+                        {#if loggingIn}
+                            Logging in
+                        {:else}
+                            Login
+                        {/if}
+                    {/if}
+                </button> <br>
             </div>
         </div>
         <div class="three columns">
