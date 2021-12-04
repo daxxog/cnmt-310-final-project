@@ -50,7 +50,7 @@
         }).then( res => res.json() );
 
         if( (response.success ?? false) === true) {
-            await goto('/');
+            await goto('./');
         } else {
             const errors = new ErrorHandler();
             errors.addError('Invalid username or password!');

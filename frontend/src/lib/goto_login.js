@@ -15,7 +15,7 @@ export const requireLogin = (next) => {
             await next();
         } else {
             // the user isn't logged in
-            await goto('/login');
+            await goto('./login');
         }
     });
 };

@@ -173,7 +173,7 @@
                          then( res => res.json() );
 
         if( (response.logged_out ?? false) === true) {
-            await goto('/login');
+            await goto('./login');
         } else {
             horriblyWrong();
         }
