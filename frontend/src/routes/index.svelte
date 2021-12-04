@@ -201,9 +201,6 @@ span.error-header {
     font-size: 120%;
     font-weight: bold;
 }
-button.bad-button {
-    background-color: red;
-}
 </style>
 
 
