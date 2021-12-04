@@ -1,0 +1,6 @@
+This favicon was generated using the following font:
+
+- Font Title: Coming Soon
+- Font Author: Copyright (c) 2010 by Open Window. All rights reserved.
+- Font Source: http://fonts.gstatic.com/s/comingsoon/v12/qWcuB6mzpYL7AJ2VfdQR1u-SUjjzsykh.ttf
+- Font License: Apache License, version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.html))
