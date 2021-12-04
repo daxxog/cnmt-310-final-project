@@ -158,7 +158,7 @@
         }
     }
 
-    const quiz = new Quiz();
+    let quiz = new Quiz();
     quiz.update = () => {
         quiz = quiz;
     };
