@@ -75,7 +75,7 @@
         }
 
         get answer() {
-            return this._answer;
+            return this._answer ?? '';
         }
 
         async checkAnswer() {
@@ -85,8 +85,13 @@
             // update the DOM so the "Check Answer" button is actually disabled
             this.updateDOM();
 
+            // append the answer to the formdata we are going to send
             const formData = new FormData();
             formData.append('answer', this.answer);
+
+            // clear our answer from the text box
+            // (will be rendered after the fetch and answer reseults)
+            this._answer = '';
 
             const response = await fetch(BACKEND_ENDPOINT + '/a.php', {
                 credentials: CREDENTIAL_MODE,
