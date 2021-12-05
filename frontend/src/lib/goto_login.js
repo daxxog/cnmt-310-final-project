@@ -3,7 +3,7 @@ import { goto } from '$app/navigation';
 
 import { BACKEND_ENDPOINT, CREDENTIAL_MODE } from './const.js';
 
-export const gotoLogin = async => {
+export const gotoLogin = async () => {
     await goto('/~dvolm359/cnmt-310-final-project/login');
 };
 
