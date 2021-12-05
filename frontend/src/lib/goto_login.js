@@ -3,6 +3,9 @@ import { goto } from '$app/navigation';
 
 import { BACKEND_ENDPOINT, CREDENTIAL_MODE } from './const.js';
 
+export const gotoLogin = async => {
+    await goto('/~dvolm359/cnmt-310-final-project/login');
+};
 
 export const requireLogin = (next) => {
     onMount(async () => {
@@ -15,7 +18,7 @@ export const requireLogin = (next) => {
             await next();
         } else {
             // the user isn't logged in
-            await goto('./login');
+            await gotoLogin();
         }
     });
 };

@@ -3,10 +3,8 @@
 </svelte:head>
 
 <script>
-    import { goto } from '$app/navigation';
-
     import { BACKEND_ENDPOINT, CREDENTIAL_MODE } from '../lib/const.js';
-    import { requireLogin } from '../lib/goto_login.js';
+    import { requireLogin, gotoLogin } from '../lib/goto_login.js';
     import { ErrorHandler } from '../lib/error_handler.js';
 
 
@@ -178,7 +176,7 @@
                          then( res => res.json() );
 
         if( (response.logged_out ?? false) === true) {
-            await goto('./login');
+            await gotoLogin();
         } else {
             horriblyWrong();
         }
