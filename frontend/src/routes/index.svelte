@@ -84,8 +84,10 @@
             this.updateDOM();
 
             // append the answer to the formdata we are going to send
+            // replace blank answers with "I don't know" to prevent showing the user
+            // an unnecessary error
             const formData = new FormData();
-            formData.append('answer', this.answer);
+            formData.append('answer', this.answer === '' ? "I don't know" : this.answer);
 
             // clear our answer from the text box
             // (will be rendered after the fetch and answer reseults)
